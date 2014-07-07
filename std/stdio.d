@@ -200,6 +200,10 @@ else version (GENERIC_IO)
     alias FLOCK = flockfile;
     alias FUNLOCK = funlockfile;
 }
+else version (Solaris)
+{
+    version = GENERIC_IO;
+}
 else
 {
     static assert(0, "unsupported C I/O system");
