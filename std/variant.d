@@ -657,7 +657,7 @@ public:
      * assert(a == 6);
      * ----
      */
-    @property inout T * peek(T)() inout
+    @property inout(T)* peek(T)() inout
     {
         static if (!is(T == void))
             static assert(allowed!(T), "Cannot store a " ~ T.stringof
@@ -665,17 +665,19 @@ public:
         if (type != typeid(T))
             return null;
         static if (T.sizeof <= size)
-            return cast(T*)&store;
+            return cast(inout T*)&store;
         else
-            return *cast(T**)&store;
+            return *cast(inout T**)&store;
     }
 
     /**
      * Returns the $(D_PARAM typeid) of the currently held value.
      */
 
-    @property TypeInfo type() const
+    @property TypeInfo type() const nothrow @trusted
     {
+        scope(failure) assert(0);
+
         TypeInfo result;
         fptr(OpID.getTypeInfo, null, &result);
         return result;
@@ -872,7 +874,7 @@ public:
      * Computes the hash of the held value.
      */
 
-    size_t toHash()
+    size_t toHash() const nothrow @safe
     {
         return type.getHash(&store);
     }

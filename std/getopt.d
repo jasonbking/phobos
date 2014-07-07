@@ -127,7 +127,7 @@ void main(string[] args)
 ---------
 
 To set $(D timeout) to $(D 5), invoke the program with either $(D
---timeout=5) or $(D --timeout 5).
+--timeout=5) or $(D --timeout 5).)
 
  $(UL $(LI $(I Incremental options.) If an option name has a "+" suffix and
  is bound to a numeric type, then the option's value tracks the number
@@ -218,7 +218,7 @@ getopt(args, "tune", &tuningParms);
 With the above code you can invoke the program with
 "--tune=alpha=0.5,beta=0.6", or "--tune alpha=0.5,beta=0.6".
 
-In general, the keys and values can be of any parsable types.
+In general, the keys and values can be of any parsable types.)
 
 $(LI $(I Callback options.) An option can be bound to a function or
 delegate with the signature $(D void function()), $(D void function(string option)),
